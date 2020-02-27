@@ -1,0 +1,32 @@
+p{
+    max-width: 100%;
+    width: 100%;
+    font-family: Helvetica;
+    font-weight: bold;
+    text-align: center;
+    font-size: 2em;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right:10px;
+}
+.homework{
+    background-color: hotpink;
+}
+.broken{
+    background-color: lightskyblue;
+}
+.cloud{
+    background-color: yellow;
+}
+@media(min-width: 695px){
+    section{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(5, 1fr);
+        grid-gap: 2em;
+        align-items: center;
+    }
+   
+    
+}
