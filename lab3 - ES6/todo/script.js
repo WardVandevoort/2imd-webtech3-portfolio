@@ -68,11 +68,17 @@ class App {
     note.add();
     
     // note.saveToStorage();
-    // this.reset();
+    this.reset();
   }
   
   reset(){
     // this function should reset the form 
+    let txtField = document.querySelector("#txtAddNote");
+    txtField.value = "";
+    
+    
+      
+    
   }
   
 }
