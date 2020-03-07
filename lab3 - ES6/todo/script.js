@@ -1,3 +1,5 @@
+
+
 class Note {
   constructor(title) {
     this.title = title;
@@ -18,6 +20,8 @@ class Note {
     newNote.appendChild(newP);
     newNote.appendChild(newA);
     newA.addEventListener('click', this.remove.bind(newNote));
+
+    
     
     return newNote;
   }
@@ -32,7 +36,14 @@ class Note {
     // HINT🤩
     // localStorage only supports strings, not arrays
     // if you want to store arrays, look at JSON.parse and JSON.stringify
+    let data = JSON.parse(data.getItem('data'));
+    if(data == null) {
+      data = [];
+    }
+    data.push(this.title);
+    data.setItem('data', JSON.stringify(data));
   }
+  
   
   remove(){
     // HINT🤩 the meaning of 'this' was set by bind() in the createElement function
@@ -44,19 +55,40 @@ class Note {
 class App {
   constructor() {
     console.log("👊🏼 The Constructor!");
-  
+    
+
     // HINT🤩
     // clicking the button should work
     // pressing the enter key should also work
     this.btnAdd = document.querySelector("#btnAddNote");
-    this.btnAdd.addEventListener("click", this.createNote.bind(this));
-    // this.loadNotesFromStorage();
+    this.btnAdd.addEventListener("click",this.createNote.bind(this));
+
+    this.enterAdd = document.querySelector("#txtAddNote");
+      this.enterAdd.addEventListener("keydown", enter => {
+        if(enter.keyCode == 13) {
+          enter.preventDefault();
+          document.querySelector("#btnAddNote").click();
+          
+        }
+      });
+
+      
+    this.loadNotesFromStorage();
   }
   
   loadNotesFromStorage() {
     // HINT🤩
     // load all notes from storage here and add them to the screen
     // something like note.add() in a loop would be nice
+    
+    let storage = JSON.parse(storage.getItem('data'));
+      if(storage.length > 0) {
+        storage.forEach(title => {
+          let note = new Note(title);
+          note.add();
+        });
+      }
+    
   }
    
   createNote(e){
@@ -67,7 +99,7 @@ class App {
     let note = new Note(text);
     note.add();
     
-    // note.saveToStorage();
+    note.saveToStorage();
     this.reset();
   }
   
