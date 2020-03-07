@@ -36,18 +36,25 @@ class Note {
     // HINT🤩
     // localStorage only supports strings, not arrays
     // if you want to store arrays, look at JSON.parse and JSON.stringify
-    let data = JSON.parse(data.getItem('data'));
+    let data = JSON.parse(localStorage.getItem('data'));
     if(data == null) {
       data = [];
     }
     data.push(this.title);
-    data.setItem('data', JSON.stringify(data));
+    localStorage.setItem('data', JSON.stringify(data));
   }
   
   
   remove(){
     // HINT🤩 the meaning of 'this' was set by bind() in the createElement function
     // in this function, 'this' will refer to the current note element
+
+    let beGone = JSON.parse(localStorage.getItem('data'));
+    let title = this.querySelector('p').innerHTML;
+    let beGoneIndex = beGone.indexOf(title); 
+    beGone.splice(beGoneIndex, 1);
+    localStorage.setItem('data', JSON.stringify(beGone));
+
     this.remove();
   } 
 }
@@ -64,7 +71,7 @@ class App {
     this.btnAdd.addEventListener("click",this.createNote.bind(this));
 
     this.enterAdd = document.querySelector("#txtAddNote");
-      this.enterAdd.addEventListener("keydown", enter => {
+      this.enterAdd.addEventListener("keypress", enter => {
         if(enter.keyCode == 13) {
           enter.preventDefault();
           document.querySelector("#btnAddNote").click();
@@ -81,7 +88,7 @@ class App {
     // load all notes from storage here and add them to the screen
     // something like note.add() in a loop would be nice
     
-    let storage = JSON.parse(storage.getItem('data'));
+    let storage = JSON.parse(localStorage.getItem('data'));
       if(storage.length > 0) {
         storage.forEach(title => {
           let note = new Note(title);
