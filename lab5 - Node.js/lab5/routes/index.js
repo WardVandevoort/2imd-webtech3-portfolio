@@ -7,11 +7,11 @@ router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
 });
 
-router.get("/api/v1/messages", messagesController.getAll)
+
 
 router.get("/api/v1/messages/:id", messagesController.getOne)
 
-router.get("/api/v1/messages?user=username", messagesController.getName)
+router.get("/api/v1/messages", messagesController.getAll)
 
 router.post("/api/v1/messages", messagesController.postOne)
 

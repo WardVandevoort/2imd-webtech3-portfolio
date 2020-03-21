@@ -1,8 +1,3 @@
-const getAll = (req, res) => {
-    res.json({
-      "message": "Getting your messages good sir",
-    });
-}
 
 const getOne = (req, res) => {
     res.json({
@@ -16,10 +11,18 @@ const postOne = (req, res) => {
     });
 }
 
-const getName = (req, res) => {
+const getAll = (req, res) => {
+  let user = req.query.user;
+  if(user != undefined){
     res.json({
-      "message": "Getting your messages sir " + req.params.get(username),
+      "message": "Getting your messages sir " + user,
     });
+  }
+  else{
+    res.json({
+      "message": "Getting your messages good sir",
+    });
+  }
 }
 
 const putOne = (req, res) => {
@@ -34,9 +37,9 @@ const deleteOne = (req, res) => {
     });
 }
 
-module.exports.getAll = getAll;
+
 module.exports.getOne = getOne;
 module.exports.postOne = postOne;
-module.exports.getName = getName;
+module.exports.getAll = getAll;
 module.exports.putOne = putOne;
 module.exports.deleteOne = deleteOne;
