@@ -24,7 +24,16 @@ class App{
         fetch(url).then(response => {
             return response.json();
         }).then(data => {
-            document.querySelector("#weather").innerHTML = data.currently.temperature;
+            document.querySelector("#temp").innerHTML = data.currently.temperature;
+            if(data.currently.temperature < 15){
+                document.querySelector("#grid-item2").src = "img/leffe-card.png";
+                document.querySelector("#beer").innerHTML = "Leffe";
+                document.querySelector(".grid-container").style.backgroundImage = "url('img/leffebg.jpg')";
+            }
+            else{
+                document.querySelector("#grid-item2").src = "img/hoegaarden-card.png";
+                document.querySelector("#beer").innerHTML = "Hoegaarden";
+            }
         }).catch(err => {
             console.log(err);
         })
