@@ -26,13 +26,17 @@ class App{
         }).then(data => {
             document.querySelector("#temp").innerHTML = data.currently.temperature;
             if(data.currently.temperature < 15){
-                document.querySelector("#grid-item2").src = "img/leffe-card.png";
+                document.querySelector("#grid-item1").src = "img/leffe-card.png";
                 document.querySelector("#beer").innerHTML = "Leffe";
                 document.querySelector(".grid-container").style.backgroundImage = "url('img/leffebg.jpg')";
+                document.querySelector("#paragraph").style.color = " #be9c56";
             }
             else{
-                document.querySelector("#grid-item2").src = "img/hoegaarden-card.png";
+                document.querySelector("#grid-item1").src = "img/hoegaarden-card.png";
                 document.querySelector("#beer").innerHTML = "Hoegaarden";
+                document.querySelector(".grid-container").style.backgroundImage = "url('img/hoegaardenbg.jpg')";
+                document.querySelector("#paragraph").style.color = "#0D155A";
+               
             }
         }).catch(err => {
             console.log(err);
