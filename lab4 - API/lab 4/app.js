@@ -27,20 +27,14 @@ class App{
         }).then(data => {
             document.querySelector("#temp").innerHTML = data.currently.temperature;
             if(data.currently.temperature < 15){
-                /*document.querySelector("#grid-item1").src = "img/leffe-card.png";
-                document.querySelector("#beer").innerHTML = "Leffe";
-                document.querySelector(".grid-container").style.backgroundImage = "url('img/leffebg.jpg')";
-                document.querySelector("#paragraph").style.color = " #be9c56";*/
-                document.querySelector("#temp").innerHTML = "Cold";
+                document.querySelector("#temp").innerHTML = "cold";
+                document.querySelector("#message").innerHTML = "warm up with a ";
                 this.warm = false;
                 this.getMeal();
             }
             else{
-                /*document.querySelector("#grid-item1").src = "img/hoegaarden-card.png";
-                document.querySelector("#beer").innerHTML = "Hoegaarden";
-                document.querySelector(".grid-container").style.backgroundImage = "url('img/hoegaardenbg.jpg')";
-                document.querySelector("#paragraph").style.color = "#0D155A";*/
-                document.querySelector("#temp").innerHTML = "Hot";
+                document.querySelector("#temp").innerHTML = "hot";
+                document.querySelector("#message").innerHTML = "cool down with a ";
                 this.warm = true;
                 this.getMeal();
             }
@@ -53,7 +47,7 @@ class App{
 
         let recipe;
 
-        if(this.warm == true){
+        if(this.warm == false){
           recipe = "Beefy Beer Stew";
         }
         else{
@@ -64,12 +58,9 @@ class App{
         fetch(url2).then(response => {
             return response.json();
         }).then(data => {
-            console.log()
-            //document.querySelector("#temp").innerHTML = data.results[0].title;
-             /*document.querySelector("#grid-item1").src = "img/hoegaarden-card.png";
-                document.querySelector("#beer").innerHTML = "Hoegaarden";
-                document.querySelector(".grid-container").style.backgroundImage = "url('img/hoegaardenbg.jpg')";
-                document.querySelector("#paragraph").style.color = "#0D155A";*/
+            document.querySelector("#dish").innerHTML = data.results[0].title;
+            document.querySelector("#grid-item3").src = "img/" + data.results[0].title + ".jpg";
+            document.querySelector("#ingredients").innerHTML = data.results[0].ingredients;
         }).catch(err => {
             console.log(err);
         })
